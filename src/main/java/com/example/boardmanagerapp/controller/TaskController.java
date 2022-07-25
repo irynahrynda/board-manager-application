@@ -11,6 +11,7 @@ import com.example.boardmanagerapp.model.Task;
 import com.example.boardmanagerapp.service.ColumnService;
 import com.example.boardmanagerapp.service.TaskService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,20 +43,20 @@ public class TaskController {
         Task task = mapperToModel.mapToModel(taskRequestDto);
         Columnn columnn = columnService.getColumnById(id);
         task.setColumn(columnn);
-       Task taskWithColumns =  taskService.createTask(task);
-       if (taskWithColumns != null) {
-           List<Task> tasks = columnn.getTasks();
-           tasks.add(taskWithColumns);
-           columnn.setTasks(tasks);
-           columnService.createColumn(columnn);
-       }
+        Task taskWithColumns = taskService.createTask(task);
+        if (taskWithColumns != null) {
+            List<Task> tasks = columnn.getTasks();
+            tasks.add(taskWithColumns);
+            columnn.setTasks(tasks);
+            columnService.createColumn(columnn);
+        }
 
         return mapperToDto.mapToDto(taskWithColumns);
     }
 
     @PutMapping("/{id}")
     public TaskResponseDto updateTaskById(@PathVariable Long id,
-                                  @RequestBody TaskRequestDto taskRequestDto) {
+                                          @RequestBody TaskRequestDto taskRequestDto) {
         Task task = taskService.getTaskById(id);
         if (taskRequestDto.getTitle() != null) {
             task.setTitle(taskRequestDto.getTitle());
@@ -69,8 +70,8 @@ public class TaskController {
     }
 
     @PutMapping("/{id}/update-status")
-    public TaskResponseDto updateTaskByIdByColumn (@PathVariable Long id,
-                                                   @RequestBody ColumnRequestDto columnRequestDto) {
+    public TaskResponseDto updateTaskByIdByColumn(@PathVariable Long id,
+                                                  @RequestBody ColumnRequestDto columnRequestDto) {
         Task taskById = taskService.getTaskById(id);
         Columnn columnn = columnService.getColumnByName(columnRequestDto.getName());
         taskById.setColumn(columnService.getColumnById(columnn.getId()));
