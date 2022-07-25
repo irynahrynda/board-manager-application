@@ -9,9 +9,11 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String name;
     private String backgroundImagePath;
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "board")
+    @ManyToMany(cascade = CascadeType.REMOVE)
     private List<Columnn> columnns;
 
     public Board() {

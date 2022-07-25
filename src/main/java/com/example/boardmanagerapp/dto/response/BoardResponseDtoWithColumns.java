@@ -1,12 +1,13 @@
 package com.example.boardmanagerapp.dto.response;
 
 import lombok.Data;
+
 import java.util.List;
 
 @Data
-public class ColumnResponseDto {
+public class BoardResponseDtoWithColumns {
     private Long id;
     private String name;
-    private List<Long> tasksIds;
-    private List<Long> boardsIds;
+    private String backgroundImagePath;
+    private List<ColumnResponseDtoWithTasks> columnsWithTasks;
 }

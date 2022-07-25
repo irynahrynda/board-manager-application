@@ -72,11 +72,14 @@ public class TaskController {
     @PutMapping("/{id}/update-status")
     public TaskResponseDto updateTaskByIdByColumn(@PathVariable Long id,
                                                   @RequestBody ColumnRequestDto columnRequestDto) {
-        Task taskById = taskService.getTaskById(id);
+        Task task = taskService.getTaskById(id);
         Columnn columnn = columnService.getColumnByName(columnRequestDto.getName());
-        taskById.setColumn(columnService.getColumnById(columnn.getId()));
-        Task taskUpdated = taskService.createTask(taskById);
+        if (task != null && columnn != null) {
+            task.setColumn(columnn);
+        }
+        Task taskUpdated = taskService.createTask(task);
         return mapperToDto.mapToDto(taskUpdated);
+
     }
 
     @GetMapping("/{id}")

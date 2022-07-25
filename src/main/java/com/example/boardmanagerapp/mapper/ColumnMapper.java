@@ -2,6 +2,7 @@ package com.example.boardmanagerapp.mapper;
 
 import com.example.boardmanagerapp.dto.request.ColumnRequestDto;
 import com.example.boardmanagerapp.dto.response.ColumnResponseDto;
+import com.example.boardmanagerapp.model.Board;
 import com.example.boardmanagerapp.model.Columnn;
 import com.example.boardmanagerapp.model.Task;
 import com.example.boardmanagerapp.service.BoardService;
@@ -34,8 +35,10 @@ public class ColumnMapper implements MapperToModel<ColumnRequestDto, Columnn>,
         ColumnResponseDto columnResponseDto = new ColumnResponseDto();
         columnResponseDto.setId((columnn.getId()));
         columnResponseDto.setName(columnn.getName());
-        if (columnn.getBoard() != null) {
-            columnResponseDto.setBoardId(columnn.getBoard().getId());
+        if (columnn.getBoards() != null && !columnn.getBoards().isEmpty()) {
+            columnResponseDto.setBoardsIds(columnn.getBoards().stream()
+                    .map(Board::getId)
+                    .collect(Collectors.toList()));
         }
 
         if(columnn.getTasks() != null) {

@@ -13,9 +13,8 @@ public class Columnn {
     private String name;
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "columnn")
     private List<Task> tasks;
-    @ManyToOne
-    @JoinColumn(name = "board_id")
-    private Board board;
+    @ManyToMany
+    private List<Board> boards;
 
     public Columnn() {
     }
@@ -44,11 +43,11 @@ public class Columnn {
         this.tasks = tasks;
     }
 
-    public Board getBoard() {
-        return board;
+    public List<Board> getBoards() {
+        return boards;
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
+    public void setBoards(List<Board> boards) {
+        this.boards = boards;
     }
 }

@@ -3,8 +3,11 @@ package com.example.boardmanagerapp.mapper;
 import com.example.boardmanagerapp.dto.request.BoardRequestDto;
 import com.example.boardmanagerapp.dto.response.BoardResponseDto;
 import com.example.boardmanagerapp.model.Board;
+import com.example.boardmanagerapp.model.Columnn;
 import com.example.boardmanagerapp.service.ColumnService;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 @Component
 public class BoardMapper implements MapperToModel<BoardRequestDto, Board>,
@@ -32,10 +35,12 @@ public class BoardMapper implements MapperToModel<BoardRequestDto, Board>,
         boardResponseDto.setId(board.getId());
         boardResponseDto.setName(board.getName());
         boardResponseDto.setBackgroundImagePath(board.getBackgroundImagePath());
-//        boardResponseDto.setColumnsIds(board.getColumns()
-//                .stream()
-//                .map(Column::getId)
-//                .collect(Collectors.toList()));
+        if (board.getColumns() != null) {
+            boardResponseDto.setColumnsIds(board.getColumns()
+                    .stream()
+                    .map(Columnn::getId)
+                    .collect(Collectors.toList()));
+        }
         return boardResponseDto;
     }
 }

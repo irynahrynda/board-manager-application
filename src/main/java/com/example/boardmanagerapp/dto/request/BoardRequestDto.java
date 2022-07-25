@@ -7,5 +7,4 @@ import java.util.List;
 public class BoardRequestDto {
     private String name;
 //    private String backgroundImagePath;
-//    private List<Long> columnsIds;
 }
