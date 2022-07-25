@@ -1,17 +1,23 @@
 package com.example.boardmanagerapp.service;
 
-import com.example.boardmanagerapp.model.Section;
-
+import com.example.boardmanagerapp.dto.request.BoardRequestDto;
+import com.example.boardmanagerapp.dto.request.SectionRequestDto;
+import com.example.boardmanagerapp.dto.response.SectionResponseDto;
+import com.example.boardmanagerapp.dto.response.SectionResponseDtoWithoutRelations;
 import java.util.List;
 
 public interface SectionService {
-    Section createSection(Section section);
+    SectionResponseDto createSection(SectionRequestDto sectionRequestDto);
 
-    Section getSectionById(Long id);
+    SectionResponseDto getSectionById(Long id);
 
-    List<Section> getAllSections();
+    List<SectionResponseDto> getAllSections();
 
-    Section deleteSectionById(Long id);
+    SectionResponseDto updateSectionById(Long id, SectionRequestDto sectionRequestDto);
 
-    Section getSectionByName(String name);
+    SectionResponseDtoWithoutRelations deleteSectionById(Long id);
+
+    SectionResponseDto getSectionByName(String name);
+
+    SectionResponseDto setSectionToBoard(Long id, BoardRequestDto boardRequestDto);
 }

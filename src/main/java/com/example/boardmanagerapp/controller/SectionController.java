@@ -4,100 +4,60 @@ import com.example.boardmanagerapp.dto.request.BoardRequestDto;
 import com.example.boardmanagerapp.dto.request.SectionRequestDto;
 import com.example.boardmanagerapp.dto.response.SectionResponseDto;
 import com.example.boardmanagerapp.dto.response.SectionResponseDtoWithoutRelations;
-import com.example.boardmanagerapp.mapper.MapperToDto;
-import com.example.boardmanagerapp.mapper.MapperToModel;
-import com.example.boardmanagerapp.model.Board;
-import com.example.boardmanagerapp.model.Section;
-import com.example.boardmanagerapp.service.BoardService;
 import com.example.boardmanagerapp.service.SectionService;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/sections")
 public class SectionController {
     private final SectionService sectionService;
-    private final MapperToModel<SectionRequestDto, Section> mapperToModel;
-    private final MapperToDto<SectionResponseDto, Section> mapperToDto;
 
-    private final MapperToDto<SectionResponseDtoWithoutRelations, Section> mapperToDtoWithoutRelations;
-
-    private final BoardService boardService;
-
-    public SectionController(SectionService sectionService,
-                             MapperToModel<SectionRequestDto,
-                                     Section> mapperToModel,
-                             MapperToDto<SectionResponseDto,
-                                     Section> mapperToDto,
-                             MapperToDto<SectionResponseDtoWithoutRelations,
-                                     Section> mapperToDtoWithoutRelations, BoardService boardService) {
+    public SectionController(SectionService sectionService) {
         this.sectionService = sectionService;
-        this.mapperToModel = mapperToModel;
-        this.mapperToDto = mapperToDto;
-        this.mapperToDtoWithoutRelations = mapperToDtoWithoutRelations;
-        this.boardService = boardService;
     }
-
 
     @PostMapping
     public SectionResponseDto createSection(@RequestBody SectionRequestDto sectionRequestDto) {
-        return mapperToDto.mapToDto(sectionService.createSection(
-                mapperToModel.mapToModel(sectionRequestDto)));
+        return sectionService.createSection(sectionRequestDto);
     }
 
     @GetMapping("/{id}")
     public SectionResponseDto getSectionById(@PathVariable Long id) {
-        return mapperToDto.mapToDto(sectionService.getSectionById(id));
+        return sectionService.getSectionById(id);
     }
 
     @GetMapping
     public List<SectionResponseDto> getAllSections() {
-        return sectionService.getAllSections()
-                .stream()
-                .map(mapperToDto::mapToDto)
-                .collect(Collectors.toList());
+        return sectionService.getAllSections();
     }
 
     @PutMapping("/{id}")
     public SectionResponseDto updateColumn(@PathVariable Long id,
                                            @RequestBody SectionRequestDto sectionRequestDto) {
-        Section section = sectionService.getSectionById(id);
-        section.setName(sectionRequestDto.getName());
-        sectionService.createSection(section);
-        return mapperToDto.mapToDto(section);
+        return sectionService.updateSectionById(id, sectionRequestDto);
     }
 
     @DeleteMapping("/{id}")
     public SectionResponseDtoWithoutRelations deleteSectionById(@PathVariable Long id) {
-        Section section = sectionService.getSectionById(id);
-        sectionService.deleteSectionById(id);
-        return mapperToDtoWithoutRelations.mapToDto(section);
+        return sectionService.deleteSectionById(id);
     }
 
     @GetMapping("/by-name")
     public SectionResponseDto getSectionByName(@RequestParam String name) {
-        return mapperToDto.mapToDto(sectionService.getSectionByName(name));
+        return sectionService.getSectionByName(name);
     }
 
-    @PutMapping("/{id}/set-board")
+    @PutMapping("/{id}/set-to-board")
     public SectionResponseDto setSectionToBoard(@PathVariable Long id, @RequestBody BoardRequestDto boardRequestDto) {
-        Section section = sectionService.getSectionById(id);
-        Board board = boardService.getBoardByName(boardRequestDto.getName());
-        List<Section> sections = board.getSections();
-        List<Board> boards = section.getBoards();
-        Section updatedSection = new Section();
-
-
-        if (section != null && board != null) {
-            boards.add(board);
-            section.setBoards(boards);
-            updatedSection = sectionService.createSection(section);
-            sections.add(section);
-            boardService.createBoard(board);
-        }
-
-        return mapperToDto.mapToDto(section);
+        return sectionService.setSectionToBoard(id, boardRequestDto);
     }
 }

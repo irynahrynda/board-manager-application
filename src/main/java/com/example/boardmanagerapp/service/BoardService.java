@@ -1,17 +1,27 @@
 package com.example.boardmanagerapp.service;
 
-import com.example.boardmanagerapp.model.Board;
-
+import com.example.boardmanagerapp.dto.request.BoardRequestDto;
+import com.example.boardmanagerapp.dto.request.SectionRequestDto;
+import com.example.boardmanagerapp.dto.response.BoardResponseDto;
+import com.example.boardmanagerapp.dto.response.BoardResponseDtoWithSections;
 import java.util.List;
 
 public interface BoardService {
-    Board createBoard(Board board);
+    BoardResponseDto createBoard(BoardRequestDto boardRequestDto);
 
-    Board getBoardById(Long id);
+    BoardResponseDto getBoardById(Long id);
 
-    List<Board> getAllBoards();
+    List<BoardResponseDto> getAllBoards();
 
-    Board deleteBoardById(Long id);
+    BoardResponseDto deleteBoardById(Long id);
 
-    Board getBoardByName(String name);
+    BoardResponseDto getBoardByName(String name);
+
+    BoardResponseDto renameBoardById(Long id, BoardRequestDto boardRequestDto);
+
+    BoardResponseDto addImagePathToBoard(Long id, String path);
+
+    BoardResponseDtoWithSections getFullBoardById(Long id);
+
+    String removeSectionFromBoard(Long id, SectionRequestDto sectionRequestDto);
 }
