@@ -1,6 +1,5 @@
 package com.example.boardmanagerapp.service;
 
-import com.example.boardmanagerapp.model.Column;
 import com.example.boardmanagerapp.model.Task;
 
 import java.util.List;
@@ -12,5 +11,5 @@ public interface TaskService {
 
     List<Task> getAllTasks();
 
-    void deleteTasksById(Long id);
+    Task deleteTasksById(Long id);
 }

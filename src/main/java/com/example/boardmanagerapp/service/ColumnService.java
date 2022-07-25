@@ -1,14 +1,17 @@
 package com.example.boardmanagerapp.service;
 
-import com.example.boardmanagerapp.model.Column;
+import com.example.boardmanagerapp.model.Columnn;
+
 import java.util.List;
 
 public interface ColumnService {
-    Column createColumn(Column column);
+    Columnn createColumn(Columnn columnn);
 
-    Column getColumnById(Long id);
+    Columnn getColumnById(Long id);
 
-    List<Column> getAllColumns();
+    List<Columnn> getAllColumns();
 
-    void deleteColumnsById(Long id);
+    Columnn deleteColumnById(Long id);
+
+    Columnn getColumnByName(String name);
 }

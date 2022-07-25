@@ -1,5 +1,5 @@
 package com.example.boardmanagerapp.mapper;
 
-public interface ResponseDtoMapper<D, M> {
+public interface MapperToDto<D, M> {
     D mapToDto(M model);
 }

@@ -5,18 +5,19 @@ import java.util.List;
 
 @Entity
 @Table(name = "columns")
-public class Column {
+public class Columnn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String name;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "columnn")
     private List<Task> tasks;
     @ManyToOne
     @JoinColumn(name = "board_id")
     private Board board;
 
-    public Column() {
+    public Columnn() {
     }
 
     public Long getId() {

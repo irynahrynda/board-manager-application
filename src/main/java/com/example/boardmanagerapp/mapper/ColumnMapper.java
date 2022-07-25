@@ -2,7 +2,7 @@ package com.example.boardmanagerapp.mapper;
 
 import com.example.boardmanagerapp.dto.request.ColumnRequestDto;
 import com.example.boardmanagerapp.dto.response.ColumnResponseDto;
-import com.example.boardmanagerapp.model.Column;
+import com.example.boardmanagerapp.model.Columnn;
 import com.example.boardmanagerapp.model.Task;
 import com.example.boardmanagerapp.service.BoardService;
 import com.example.boardmanagerapp.service.TaskService;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
 @Component
-public class ColumnMapper implements RequestDtoMapper<ColumnRequestDto, Column>,
-        ResponseDtoMapper<ColumnResponseDto, Column> {
+public class ColumnMapper implements MapperToModel<ColumnRequestDto, Columnn>,
+        MapperToDto<ColumnResponseDto, Columnn> {
 
     private final BoardService boardService;
     private final TaskService taskService;
@@ -23,27 +23,27 @@ public class ColumnMapper implements RequestDtoMapper<ColumnRequestDto, Column>,
     }
 
     @Override
-    public Column mapToModel(ColumnRequestDto dto) {
-        Column column = new Column();
-        column.setName(dto.getName());
-        column.setBoard(boardService.getBoardById(dto.getBoardId()));
-        column.setTasks(dto.getTasksIds().stream()
-                .map(taskService::getTaskById)
-                .collect(Collectors.toList()));
-        return column;
+    public Columnn mapToModel(ColumnRequestDto columnRequestDto) {
+        Columnn columnn = new Columnn();
+        columnn.setName(columnRequestDto.getName());
+        return columnn;
     }
 
     @Override
-    public ColumnResponseDto mapToDto(Column model) {
+    public ColumnResponseDto mapToDto(Columnn columnn) {
         ColumnResponseDto columnResponseDto = new ColumnResponseDto();
-        columnResponseDto.setId((model.getId()));
-        columnResponseDto.setName(model.getName());
-        columnResponseDto.setBoardId(model.getBoard().getId());
-        columnResponseDto.setTasksIds(model.getTasks()
-                .stream()
-                .map(Task::getId)
-                .collect(Collectors.toList()));
-        return columnResponseDto;
+        columnResponseDto.setId((columnn.getId()));
+        columnResponseDto.setName(columnn.getName());
+        if (columnn.getBoard() != null) {
+            columnResponseDto.setBoardId(columnn.getBoard().getId());
+        }
 
+        if(columnn.getTasks() != null) {
+            columnResponseDto.setTasksIds(columnn.getTasks()
+                    .stream()
+                    .map(Task::getId)
+                    .collect(Collectors.toList()));
+        }
+        return columnResponseDto;
     }
 }

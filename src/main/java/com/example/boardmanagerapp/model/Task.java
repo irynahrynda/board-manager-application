@@ -12,7 +12,7 @@ public class Task {
     private String description;
     @ManyToOne
     @JoinColumn(name = "column_id")
-    private Column column;
+    private Columnn columnn;
 
     public Task() {
     }
@@ -41,11 +41,11 @@ public class Task {
         this.description = description;
     }
 
-    public Column getColumn() {
-        return column;
+    public Columnn getColumn() {
+        return columnn;
     }
 
-    public void setColumn(Column column) {
-        this.column = column;
+    public void setColumn(Columnn columnn) {
+        this.columnn = columnn;
     }
 }

@@ -31,7 +31,10 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void deleteBoardById(Long id) {
+    public Board deleteBoardById(Long id) {
+        Board boardToDelete = boardRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Can't delete board by id " + id));
         boardRepository.deleteById(id);
+        return boardToDelete;
     }
 }

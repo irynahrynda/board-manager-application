@@ -11,8 +11,8 @@ public class Board {
     private Long id;
     private String name;
     private String backgroundImagePath;
-    @OneToMany(mappedBy = "board")
-    private List<Column> columns;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "board")
+    private List<Columnn> columnns;
 
     public Board() {
     }
@@ -41,11 +41,11 @@ public class Board {
         this.backgroundImagePath = backgroundImagePath;
     }
 
-    public List<Column> getColumns() {
-        return columns;
+    public List<Columnn> getColumns() {
+        return columnns;
     }
 
-    public void setColumns(List<Column> columns) {
-        this.columns = columns;
+    public void setColumns(List<Columnn> columnns) {
+        this.columnns = columnns;
     }
 }

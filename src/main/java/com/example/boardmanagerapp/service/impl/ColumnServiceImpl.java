@@ -1,9 +1,10 @@
 package com.example.boardmanagerapp.service.impl;
 
-import com.example.boardmanagerapp.model.Column;
+import com.example.boardmanagerapp.model.Columnn;
 import com.example.boardmanagerapp.repository.ColumnRepository;
 import com.example.boardmanagerapp.service.ColumnService;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -15,23 +16,30 @@ public class ColumnServiceImpl implements ColumnService {
     }
 
     @Override
-    public Column createColumn(Column column) {
-        return columnRepository.save(column);
+    public Columnn createColumn(Columnn columnn) {
+        return columnRepository.save(columnn);
     }
 
     @Override
-    public Column getColumnById(Long id) {
+    public Columnn getColumnById(Long id) {
         return columnRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Can't get column by id " + id));
     }
 
     @Override
-    public List<Column> getAllColumns() {
+    public List<Columnn> getAllColumns() {
         return columnRepository.findAll();
     }
 
+    public Columnn deleteColumnById(Long id) {
+        Columnn columnnToDelete = columnRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Can't delete column by id " + id));
+        columnRepository.deleteById(id);
+        return columnnToDelete;
+    }
+
     @Override
-    public void deleteColumnsById(Long id) {
-        columnRepository.findById(id);
+    public Columnn getColumnByName(String name) {
+      return columnRepository.getColumnnByName(name);
     }
 }
