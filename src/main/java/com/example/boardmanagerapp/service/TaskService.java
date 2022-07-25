@@ -1,15 +1,20 @@
 package com.example.boardmanagerapp.service;
 
-import com.example.boardmanagerapp.model.Task;
-
+import com.example.boardmanagerapp.dto.request.SectionRequestDto;
+import com.example.boardmanagerapp.dto.request.TaskRequestDto;
+import com.example.boardmanagerapp.dto.response.TaskResponseDto;
 import java.util.List;
 
 public interface TaskService {
-    Task createTask(Task task);
+    TaskResponseDto createTask(Long id, TaskRequestDto taskRequestDto);
 
-    Task getTaskById(Long id);
+    TaskResponseDto getTaskById(Long id);
 
-    List<Task> getAllTasks();
+    List<TaskResponseDto> getAllTasks();
 
-    Task deleteTasksById(Long id);
+    TaskResponseDto deleteTasksById(Long id);
+
+    TaskResponseDto updateTaskById(Long id, TaskRequestDto taskRequestDto);
+
+    TaskResponseDto updateStatus(Long id, SectionRequestDto sectionRequestDto);
 }
