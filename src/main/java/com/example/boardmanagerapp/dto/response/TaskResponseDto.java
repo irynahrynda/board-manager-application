@@ -7,5 +7,5 @@ public class TaskResponseDto {
     private Long id;
     private String title;
     private String description;
-    private Long columnId;
+    private Long sectionId;
 }

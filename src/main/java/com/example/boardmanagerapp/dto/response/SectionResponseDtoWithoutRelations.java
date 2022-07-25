@@ -3,7 +3,7 @@ package com.example.boardmanagerapp.dto.response;
 import lombok.Data;
 
 @Data
-public class ColumnResponseDtoWithoutRelations {
+public class SectionResponseDtoWithoutRelations {
     private Long id;
     private String name;
 }

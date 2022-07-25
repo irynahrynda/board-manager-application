@@ -4,7 +4,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ColumnResponseDto {
+public class SectionResponseDto {
     private Long id;
     private String name;
     private List<Long> tasksIds;
