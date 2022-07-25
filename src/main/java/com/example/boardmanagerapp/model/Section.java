@@ -4,19 +4,19 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "columns")
-public class Columnn {
+@Table(name = "sections")
+public class Section {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
     private String name;
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "columnn")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "section")
     private List<Task> tasks;
     @ManyToMany
     private List<Board> boards;
 
-    public Columnn() {
+    public Section() {
     }
 
     public Long getId() {
@@ -49,5 +49,15 @@ public class Columnn {
 
     public void setBoards(List<Board> boards) {
         this.boards = boards;
+    }
+
+    @Override
+    public String toString() {
+        return "Section{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", tasks=" + tasks
+                + ", boards=" + boards
+                + '}';
     }
 }

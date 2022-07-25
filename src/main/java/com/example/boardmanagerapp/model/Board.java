@@ -9,12 +9,11 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(unique = true)
     private String name;
     private String backgroundImagePath;
     @ManyToMany(cascade = CascadeType.REMOVE)
-    private List<Columnn> columnns;
+    private List<Section> sections;
 
     public Board() {
     }
@@ -43,11 +42,21 @@ public class Board {
         this.backgroundImagePath = backgroundImagePath;
     }
 
-    public List<Columnn> getColumns() {
-        return columnns;
+    public List<Section> getSections() {
+        return sections;
     }
 
-    public void setColumns(List<Columnn> columnns) {
-        this.columnns = columnns;
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
+    }
+
+    @Override
+    public String toString() {
+        return "Board{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", backgroundImagePath='" + backgroundImagePath + '\''
+                + ", sections=" + sections
+                + '}';
     }
 }

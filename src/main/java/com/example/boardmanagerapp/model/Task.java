@@ -11,8 +11,7 @@ public class Task {
     private String title;
     private String description;
     @ManyToOne
-    @JoinColumn(name = "column_id")
-    private Columnn columnn;
+    private Section section;
 
     public Task() {
     }
@@ -41,11 +40,21 @@ public class Task {
         this.description = description;
     }
 
-    public Columnn getColumn() {
-        return columnn;
+    public Section getSection() {
+        return section;
     }
 
-    public void setColumn(Columnn columnn) {
-        this.columnn = columnn;
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{"
+                + "id=" + id
+                + ", title='" + title + '\''
+                + ", description='" + description + '\''
+                + ", section=" + section
+                + '}';
     }
 }

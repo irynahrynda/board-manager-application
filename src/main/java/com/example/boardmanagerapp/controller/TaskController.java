@@ -1,14 +1,14 @@
 package com.example.boardmanagerapp.controller;
 
-import com.example.boardmanagerapp.dto.request.ColumnRequestDto;
+import com.example.boardmanagerapp.dto.request.SectionRequestDto;
 import com.example.boardmanagerapp.dto.request.TaskRequestDto;
-import com.example.boardmanagerapp.dto.response.ColumnResponseDto;
+import com.example.boardmanagerapp.dto.response.SectionResponseDto;
 import com.example.boardmanagerapp.dto.response.TaskResponseDto;
 import com.example.boardmanagerapp.mapper.MapperToDto;
 import com.example.boardmanagerapp.mapper.MapperToModel;
-import com.example.boardmanagerapp.model.Columnn;
+import com.example.boardmanagerapp.model.Section;
 import com.example.boardmanagerapp.model.Task;
-import com.example.boardmanagerapp.service.ColumnService;
+import com.example.boardmanagerapp.service.SectionService;
 import com.example.boardmanagerapp.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,36 +19,34 @@ import java.util.stream.Collectors;
 @RequestMapping("/tasks")
 public class TaskController {
     private final TaskService taskService;
-    private final ColumnService columnService;
+    private final SectionService sectionService;
     private final MapperToModel<TaskRequestDto, Task> mapperToModel;
     private final MapperToDto<TaskResponseDto, Task> mapperToDto;
 
-    private final MapperToDto<ColumnResponseDto, Columnn> columnMapperToDto;
-    private final MapperToModel<ColumnRequestDto, Columnn> columnMapperToModel;
+    private final MapperToDto<SectionResponseDto, Section> sectionMapperToDto;
+    private final MapperToModel<SectionRequestDto, Section> sectionMapperToModel;
 
-
-    public TaskController(TaskService taskService, ColumnService columnService,
-                          MapperToModel<TaskRequestDto, Task> mapperToModel,
-                          MapperToDto<TaskResponseDto, Task> mapperToDto, MapperToDto<ColumnResponseDto, Columnn> columnMapperToDto, MapperToModel<ColumnRequestDto, Columnn> columnMapperToModel) {
+    public TaskController(TaskService taskService, SectionService sectionService, MapperToModel<TaskRequestDto, Task> mapperToModel, MapperToDto<TaskResponseDto, Task> mapperToDto, MapperToDto<SectionResponseDto, Section> sectionMapperToDto, MapperToModel<SectionRequestDto, Section> sectionMapperToModel) {
         this.taskService = taskService;
-        this.columnService = columnService;
+        this.sectionService = sectionService;
         this.mapperToModel = mapperToModel;
         this.mapperToDto = mapperToDto;
-        this.columnMapperToDto = columnMapperToDto;
-        this.columnMapperToModel = columnMapperToModel;
+        this.sectionMapperToDto = sectionMapperToDto;
+        this.sectionMapperToModel = sectionMapperToModel;
     }
 
-    @PostMapping("/columns/{id}")
+
+    @PostMapping("/sections/{id}")
     public TaskResponseDto createTask(@PathVariable Long id, @RequestBody TaskRequestDto taskRequestDto) {
         Task task = mapperToModel.mapToModel(taskRequestDto);
-        Columnn columnn = columnService.getColumnById(id);
-        task.setColumn(columnn);
+        Section section = sectionService.getSectionById(id);
+        task.setSection(section);
         Task taskWithColumns = taskService.createTask(task);
         if (taskWithColumns != null) {
-            List<Task> tasks = columnn.getTasks();
+            List<Task> tasks = section.getTasks();
             tasks.add(taskWithColumns);
-            columnn.setTasks(tasks);
-            columnService.createColumn(columnn);
+            section.setTasks(tasks);
+            sectionService.createSection(section);
         }
 
         return mapperToDto.mapToDto(taskWithColumns);
@@ -70,12 +68,12 @@ public class TaskController {
     }
 
     @PutMapping("/{id}/update-status")
-    public TaskResponseDto updateTaskByIdByColumn(@PathVariable Long id,
-                                                  @RequestBody ColumnRequestDto columnRequestDto) {
+    public TaskResponseDto updateStatus(@PathVariable Long id,
+                                                  @RequestBody SectionRequestDto sectionRequestDto) {
         Task task = taskService.getTaskById(id);
-        Columnn columnn = columnService.getColumnByName(columnRequestDto.getName());
-        if (task != null && columnn != null) {
-            task.setColumn(columnn);
+        Section section = sectionService.getSectionByName(sectionRequestDto.getName());
+        if (task != null && section != null) {
+            task.setSection(section);
         }
         Task taskUpdated = taskService.createTask(task);
         return mapperToDto.mapToDto(taskUpdated);
@@ -96,7 +94,6 @@ public class TaskController {
 
     @DeleteMapping("/{id}")
     public TaskResponseDto deleteTaskById(@PathVariable Long id) {
-        TaskResponseDto taskResponseDto = mapperToDto.mapToDto(taskService.deleteTasksById(id));
-        return taskResponseDto;
+        return mapperToDto.mapToDto(taskService.deleteTasksById(id));
     }
 }

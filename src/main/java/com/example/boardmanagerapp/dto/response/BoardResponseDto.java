@@ -8,5 +8,5 @@ public class BoardResponseDto {
     private Long id;
     private String name;
     private String backgroundImagePath;
-    private List<Long> columnsIds;
+    private List<Long> sectionIds;
 }

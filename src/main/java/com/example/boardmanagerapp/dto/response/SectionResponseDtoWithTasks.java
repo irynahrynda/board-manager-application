@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ColumnResponseDtoWithTasks {
+public class SectionResponseDtoWithTasks {
     private Long id;
     private String name;
     private List<TaskResponseDto> tasks;
