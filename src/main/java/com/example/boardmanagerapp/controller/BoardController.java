@@ -6,6 +6,7 @@ import com.example.boardmanagerapp.dto.response.BoardResponseDto;
 import com.example.boardmanagerapp.dto.response.BoardResponseDtoWithSections;
 import com.example.boardmanagerapp.service.BoardService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.util.List;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,8 +42,10 @@ public class BoardController {
 
     @GetMapping
     @ApiOperation(value = "Get all boards with pagination")
-    public List<BoardResponseDto> getAllBoards(@RequestParam(defaultValue = "10") Integer count,
-                                               @RequestParam(defaultValue = "0") Integer page) {
+    public List<BoardResponseDto> getAllBoards(@RequestParam(defaultValue = "10")
+                                               @ApiParam(value = "Default value " + "is `10`") Integer count,
+                                               @RequestParam(defaultValue = "0")
+                                               @ApiParam(value = "Default value " + "is `0`") Integer page) {
         PageRequest pageRequest = PageRequest.of(page, count);
         return boardService.getAllBoards(pageRequest);
     }
