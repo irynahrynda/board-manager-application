@@ -13,6 +13,8 @@ import com.example.boardmanagerapp.repository.SectionRepository;
 import com.example.boardmanagerapp.service.BoardService;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -43,8 +45,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardResponseDto> getAllBoards() {
-        return boardRepository.findAll().stream()
+    public List<BoardResponseDto> getAllBoards(PageRequest pageRequest) {
+        return boardRepository.findAll(pageRequest).stream()
                 .map(boardMapperToDto::mapToDto)
                 .collect(Collectors.toList());
     }
@@ -55,11 +57,6 @@ public class BoardServiceImpl implements BoardService {
                 new RuntimeException("Can't delete board by id " + id));
         boardRepository.deleteById(id);
         return boardMapperToDto.mapToDto(boardToDelete);
-    }
-
-    @Override
-    public BoardResponseDto getBoardByName(String name) {
-        return boardMapperToDto.mapToDto(boardRepository.getBoardByName(name));
     }
 
     @Override

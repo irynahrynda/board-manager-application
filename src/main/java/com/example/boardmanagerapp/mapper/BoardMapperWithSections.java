@@ -4,9 +4,8 @@ import com.example.boardmanagerapp.dto.response.BoardResponseDtoWithSections;
 import com.example.boardmanagerapp.dto.response.SectionResponseDtoWithTasks;
 import com.example.boardmanagerapp.model.Board;
 import com.example.boardmanagerapp.model.Section;
-import org.springframework.stereotype.Component;
-
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 
 @Component
 public class BoardMapperWithSections implements MapperToDto<BoardResponseDtoWithSections, Board> {

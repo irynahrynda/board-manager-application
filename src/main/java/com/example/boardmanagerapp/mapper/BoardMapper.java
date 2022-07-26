@@ -4,9 +4,8 @@ import com.example.boardmanagerapp.dto.request.BoardRequestDto;
 import com.example.boardmanagerapp.dto.response.BoardResponseDto;
 import com.example.boardmanagerapp.model.Board;
 import com.example.boardmanagerapp.model.Section;
-import org.springframework.stereotype.Component;
-
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 
 @Component
 public class BoardMapper implements MapperToModel<BoardRequestDto, Board>,
@@ -16,7 +15,7 @@ public class BoardMapper implements MapperToModel<BoardRequestDto, Board>,
     public Board mapToModel(BoardRequestDto boardRequestDto) {
         Board board = new Board();
         board.setName(boardRequestDto.getName());
-//        board.setBackgroundImagePath(boardRequestDto.getBackgroundImagePath());
+//      board.setBackgroundImagePath(boardRequestDto.getBackgroundImagePath());
         return board;
     }
 

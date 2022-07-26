@@ -1,8 +1,7 @@
 package com.example.boardmanagerapp.dto.response;
 
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BoardResponseDtoWithSections {
