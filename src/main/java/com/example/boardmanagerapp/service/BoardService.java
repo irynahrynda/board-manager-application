@@ -5,17 +5,16 @@ import com.example.boardmanagerapp.dto.request.SectionRequestDto;
 import com.example.boardmanagerapp.dto.response.BoardResponseDto;
 import com.example.boardmanagerapp.dto.response.BoardResponseDtoWithSections;
 import java.util.List;
+import org.springframework.data.domain.PageRequest;
 
 public interface BoardService {
     BoardResponseDto createBoard(BoardRequestDto boardRequestDto);
 
     BoardResponseDto getBoardById(Long id);
 
-    List<BoardResponseDto> getAllBoards();
+    List<BoardResponseDto> getAllBoards(PageRequest pageRequest);
 
     BoardResponseDto deleteBoardById(Long id);
-
-    BoardResponseDto getBoardByName(String name);
 
     BoardResponseDto renameBoardById(Long id, BoardRequestDto boardRequestDto);
 

@@ -5,11 +5,8 @@ import com.example.boardmanagerapp.dto.response.SectionResponseDto;
 import com.example.boardmanagerapp.model.Board;
 import com.example.boardmanagerapp.model.Section;
 import com.example.boardmanagerapp.model.Task;
-import com.example.boardmanagerapp.service.BoardService;
-import com.example.boardmanagerapp.service.TaskService;
-import org.springframework.stereotype.Component;
-
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 
 @Component
 public class SectionMapper implements MapperToModel<SectionRequestDto, Section>,

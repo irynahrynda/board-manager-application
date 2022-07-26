@@ -3,7 +3,6 @@ package com.example.boardmanagerapp.mapper;
 import com.example.boardmanagerapp.dto.request.TaskRequestDto;
 import com.example.boardmanagerapp.dto.response.TaskResponseDto;
 import com.example.boardmanagerapp.model.Task;
-import com.example.boardmanagerapp.service.SectionService;
 import org.springframework.stereotype.Component;
 
 @Component
