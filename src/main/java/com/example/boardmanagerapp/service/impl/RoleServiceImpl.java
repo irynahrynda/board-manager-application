@@ -5,8 +5,6 @@ import com.example.boardmanagerapp.repository.RoleRepository;
 import com.example.boardmanagerapp.service.RoleService;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
@@ -15,9 +13,8 @@ public class RoleServiceImpl implements RoleService {
         this.roleRepository = roleRepository;
     }
 
-
     @Override
-    public Role add(Role role) {
+    public Role save(Role role) {
         return roleRepository.save(role);
     }
 

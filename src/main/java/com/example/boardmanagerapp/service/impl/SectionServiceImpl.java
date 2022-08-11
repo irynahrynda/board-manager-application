@@ -11,9 +11,10 @@ import com.example.boardmanagerapp.model.Section;
 import com.example.boardmanagerapp.repository.BoardRepository;
 import com.example.boardmanagerapp.repository.SectionRepository;
 import com.example.boardmanagerapp.service.SectionService;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.stereotype.Service;
 
 @Service
 public class SectionServiceImpl implements SectionService {
