@@ -3,6 +3,7 @@ package com.example.boardmanagerapp.service;
 import com.example.boardmanagerapp.dto.request.SectionRequestDto;
 import com.example.boardmanagerapp.dto.request.TaskRequestDto;
 import com.example.boardmanagerapp.dto.response.TaskResponseDto;
+
 import java.util.List;
 
 public interface TaskService {

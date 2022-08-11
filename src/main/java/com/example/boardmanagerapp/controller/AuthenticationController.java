@@ -1,6 +1,5 @@
 package com.example.boardmanagerapp.controller;
 
-
 import com.example.boardmanagerapp.dto.request.UserRequestDto;
 import com.example.boardmanagerapp.dto.response.UserResponseDto;
 import com.example.boardmanagerapp.mapper.MapperToDto;
@@ -17,11 +16,11 @@ public class AuthenticationController {
     private final AuthenticationService authService;
     private final MapperToDto<UserResponseDto, User> userDtoResponseMapper;
 
-    public AuthenticationController(AuthenticationService authService, MapperToDto<UserResponseDto, User> userDtoResponseMapper) {
+    public AuthenticationController(AuthenticationService authService,
+                                    MapperToDto<UserResponseDto, User> userDtoResponseMapper) {
         this.authService = authService;
         this.userDtoResponseMapper = userDtoResponseMapper;
     }
-
 
     @PostMapping("/register")
     public UserResponseDto register(@RequestBody @Valid UserRequestDto requestDto) {

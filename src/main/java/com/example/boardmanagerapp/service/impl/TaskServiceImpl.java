@@ -10,9 +10,10 @@ import com.example.boardmanagerapp.model.Task;
 import com.example.boardmanagerapp.repository.SectionRepository;
 import com.example.boardmanagerapp.repository.TaskRepository;
 import com.example.boardmanagerapp.service.TaskService;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.stereotype.Service;
 
 @Service
 public class TaskServiceImpl implements TaskService {

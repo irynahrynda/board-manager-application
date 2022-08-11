@@ -1,15 +1,11 @@
 package com.example.boardmanagerapp.security;
 
 import com.example.boardmanagerapp.model.User;
-import com.example.boardmanagerapp.repository.UserRepository;
 import com.example.boardmanagerapp.service.UserService;
-import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import static org.springframework.security.core.userdetails.User.withUsername;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

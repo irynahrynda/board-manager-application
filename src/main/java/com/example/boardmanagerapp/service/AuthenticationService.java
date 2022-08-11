@@ -1,6 +1,5 @@
 package com.example.boardmanagerapp.service;
 
-
 import com.example.boardmanagerapp.model.User;
 
 public interface AuthenticationService {

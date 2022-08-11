@@ -11,11 +11,11 @@ import com.example.boardmanagerapp.model.Section;
 import com.example.boardmanagerapp.repository.BoardRepository;
 import com.example.boardmanagerapp.repository.SectionRepository;
 import com.example.boardmanagerapp.service.BoardService;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BoardServiceImpl implements BoardService {

@@ -4,8 +4,9 @@ import com.example.boardmanagerapp.dto.request.BoardRequestDto;
 import com.example.boardmanagerapp.dto.request.SectionRequestDto;
 import com.example.boardmanagerapp.dto.response.BoardResponseDto;
 import com.example.boardmanagerapp.dto.response.BoardResponseDtoWithSections;
-import java.util.List;
 import org.springframework.data.domain.PageRequest;
+
+import java.util.List;
 
 public interface BoardService {
     BoardResponseDto createBoard(BoardRequestDto boardRequestDto);
